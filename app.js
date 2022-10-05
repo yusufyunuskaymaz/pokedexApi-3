@@ -36,67 +36,62 @@ const bgColors = {
   dark: "black",
 };
 
-
-const rangeInput1 = document.querySelector(".rangeInput1")
-const rangeInput2 = document.querySelector(".rangeInput2")
-const rangeArea1 = document.querySelector(".rangeArea1")
-const rangeArea2 = document.querySelector(".rangeArea2")
-
-
+const rangeInput1 = document.querySelector(".rangeInput1");
+const rangeInput2 = document.querySelector(".rangeInput2");
+const rangeArea1 = document.querySelector(".rangeArea1");
+const rangeArea2 = document.querySelector(".rangeArea2");
 
 //   Range 1
 rangeInput1.addEventListener("input", (e) => {
-
-  if(Number(rangeInput1.value) > Number(rangeInput2.value)){
-    rangeInput1.value = rangeInput2.value
+  if (Number(rangeInput1.value) > Number(rangeInput2.value)) {
+    rangeInput1.value = rangeInput2.value;
   }
   // console.log(e.target.value)
 
-  rangeArea1.innerHTML = e.target.value
-})
+  rangeArea1.innerHTML = e.target.value;
+});
 //   Range 2
 rangeInput2.addEventListener("input", (e) => {
-  if(Number(rangeInput2.value) < Number(rangeInput1.value)){
-    rangeInput2.value = rangeInput1.value
+  if (Number(rangeInput2.value) < Number(rangeInput1.value)) {
+    rangeInput2.value = rangeInput1.value;
   }
 
-  rangeArea2.innerHTML = e.target.value
-})
+  rangeArea2.innerHTML = e.target.value;
+});
 
-const searchByKgButton = document.querySelector(".searchKgBtn")
+const searchByKgButton = document.querySelector(".searchKgBtn");
 
 searchByKgButton.addEventListener("click", () => {
-
-  const kgs = document.querySelectorAll(".kg")
-  let counter = 0
+  const kgs = document.querySelectorAll(".kg");
+  let counter = 0;
   kgs.forEach((item) => {
-    item.closest(".card").style.display = "none"
-    const result = Number(item.innerText) < Number(rangeInput2.value) && Number(item.innerText) > Number(rangeInput1.value)
-    if(result){
-      counter++
-      item.closest(".card").style.display = "block"
-      
+    item.closest(".card").style.display = "none";
+    const result =
+      Number(item.innerText) < Number(rangeInput2.value) &&
+      Number(item.innerText) > Number(rangeInput1.value);
+    if (result) {
+      counter++;
+      item.closest(".card").style.display = "block";
     }
-  })
+  });
 
-  const foundedFavsDiv = document.querySelector(".foundedFavs")
-  foundedFavsDiv.innerText = `${counter} pokes founded`
-  
-})
+  const foundedFavsDiv = document.querySelector(".foundedFavs");
+  foundedFavsDiv.innerText = `${counter} pokes founded`;
+});
 
-const resetKg = document.querySelector(".resetBtn")
+const resetKg = document.querySelector(".resetBtn");
 resetKg.addEventListener("click", () => {
-  const cards = document.querySelectorAll(".card")
+  const cards = document.querySelectorAll(".card");
   cards.forEach((item) => {
-    item.style.display = "block"
-  })
-  const foundedFavs = document.querySelector(".foundedFavs")
-  foundedFavs.innerHTML = `${cards.length} pokes founded`
-  rangeInput1.value = 0
-  rangeInput2.value = 1500
-  rangeArea1.innerHTML = 0
-  rangeArea2.innerHTML = 1500
-})
+    item.style.display = "block";
+  });
+  const foundedFavs = document.querySelector(".foundedFavs");
+  foundedFavs.innerHTML = `${cards.length} pokes founded`;
+  rangeInput1.value = 0;
+  rangeInput2.value = 1500;
+  rangeArea1.innerHTML = 0;
+  rangeArea2.innerHTML = 1500;
+});
 
 const searchInput = document.querySelector(".search");
 
@@ -119,7 +114,6 @@ const fetchPokedex = async (number) => {
   const data = await res.json();
 
   changeId(data);
-  
 };
 fetchPokedex();
 
@@ -133,19 +127,17 @@ const changeId = (data) => {
 };
 
 const pokesNumbers = (pokeN) => {
-  const foundedFavs = document.querySelector(".foundedFavs")
-  foundedFavs.innerText = `${pokeN-1} pokes founded`
-}
+  const foundedFavs = document.querySelector(".foundedFavs");
+  foundedFavs.innerText = `${pokeN - 1} pokes founded`;
+};
 
 const numbers = () => {
   for (var i = 0; i <= 10; i++) {
     fetchPokedex(i);
   }
-  pokesNumbers(i)
-
+  pokesNumbers(i);
 };
 numbers();
-
 
 const updateDom = (poke) => {
   const rowDiv = document.querySelector(".row");
@@ -219,94 +211,72 @@ row.addEventListener("click", (e) => {
 });
 
 setTimeout(() => {
-  
-  if(!localStorage.getItem("favs")){
+  if (!localStorage.getItem("favs")) {
     // do nothing
-  }else{
+  } else {
     const pokeIds = document.querySelectorAll("#pokeIds");
-  // console.log(pokeIds)
+    // console.log(pokeIds)
 
-  const favsArr = JSON.parse(localStorage.getItem("favs"));
+    const favsArr = JSON.parse(localStorage.getItem("favs"));
 
-  pokeIds.forEach((item) => {
-    for (let i = 0; i < pokeIds.length; i++) {
-      if (Number(item.innerText.slice(1)) == favsArr[i]) {
-        // console.log(item);
-        item.parentElement.parentElement.firstElementChild.lastElementChild.classList.replace(
-          "fa-regular",
-          "fa-solid"
-        );
+    pokeIds.forEach((item) => {
+      for (let i = 0; i < pokeIds.length; i++) {
+        if (Number(item.innerText.slice(1)) == favsArr[i]) {
+          // console.log(item);
+          item.parentElement.parentElement.firstElementChild.lastElementChild.classList.replace(
+            "fa-regular",
+            "fa-solid"
+          );
+        }
       }
-    }
-  });
+    });
   }
-
 }, 700);
 
-const showFavsButton = document.querySelector(".showFavs")
-let favFlag = false
+const showFavsButton = document.querySelector(".showFavs");
 
 showFavsButton.addEventListener("click", (e) => {
+  if (
+    JSON.parse(localStorage.getItem("favs")).length == 0 &&
+    e.target.innerText != "Show All"
+  ) {
+    console.log(favFlag);
 
-  
-
-  if(JSON.parse(localStorage.getItem("favs")).length == 0 && e.target.innerText != "Show All"  ){
-    console.log(favFlag)
-
-    alert("First choose a poke")
-    
-  }else{
+    alert("First choose a poke");
+  } else {
     if (showFavsButton.innerText == "Show Favourites") {
       showFavsButton.innerText = "Show All";
       let favArr = JSON.parse(localStorage.getItem("favs"));
-  
+
       const allPokes = document.querySelectorAll("#pokeIds");
-  
-      let foundedFavsCounter = 0
-  
+
+      let foundedFavsCounter = 0;
+
       allPokes.forEach((item) => {
         item.parentElement.parentElement.style.display = "none";
         for (let i = 0; i < allPokes.length; i++) {
           if (favArr[i] == Number(item.innerText.slice(1))) {
             item.parentElement.parentElement.style.display = "block";
-            foundedFavsCounter++
+            foundedFavsCounter++;
           }
         }
       });
-  
-      const foundedFavsDiv = document.querySelector(".foundedFavs")
-      foundedFavsDiv.innerHTML = `${foundedFavsCounter} pokes founded`
-      favFlag = true
-    }else {
+
+      const foundedFavsDiv = document.querySelector(".foundedFavs");
+      foundedFavsDiv.innerHTML = `${foundedFavsCounter} pokes founded`;
+      favFlag = true;
+    } else {
       showFavsButton.innerText = "Show Favourites";
-      const cards = document.querySelectorAll(".card")
-      const foundedFavsDiv = document.querySelector(".foundedFavs")
-      foundedFavsDiv.innerHTML = `${cards.length} pokes founded`
-      
-  
+      const cards = document.querySelectorAll(".card");
+      const foundedFavsDiv = document.querySelector(".foundedFavs");
+      foundedFavsDiv.innerHTML = `${cards.length} pokes founded`;
+
       cards.forEach((item) => {
-        item.style.display = "block"
-      })
-      
+        item.style.display = "block";
+      });
     }
   }
-   
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //! splice changes original array and returns the removed item
 // let arr = [5,7,6,8,1]
@@ -314,4 +284,3 @@ showFavsButton.addEventListener("click", (e) => {
 // arr.splice(2,1)
 
 // console.log(arr)
-
