@@ -1,3 +1,8 @@
+*{
+box-sizing: border-box !important;
+}
+
+
 body{
     background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);
 }
@@ -53,11 +58,9 @@ img{
     width: 9rem;
 }
 
-/* @media screen and (max-width: 767px) {
-    .mobile-space {margin-top:20px;}
-    /* .rangeBtns{
-        max-width: 500px !important;
-        background-color: lightblue;
-    } */
-    } */
+@media screen and (max-width: 575px) {
+    .mobile-margin1 {margin:1rem 0;}
+    .mobile-margin2 {margin-bottom:.5rem;}
+   
+    }
 
