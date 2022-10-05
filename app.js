@@ -39,6 +39,10 @@ const bgColors = {
 
 const rangeInput1 = document.querySelector(".rangeInput1")
 const rangeInput2 = document.querySelector(".rangeInput2")
+const rangeArea1 = document.querySelector(".rangeArea1")
+const rangeArea2 = document.querySelector(".rangeArea2")
+
+
 
 //   Range 1
 rangeInput1.addEventListener("input", (e) => {
@@ -48,7 +52,6 @@ rangeInput1.addEventListener("input", (e) => {
   }
   // console.log(e.target.value)
 
-  const rangeArea1 = document.querySelector(".rangeArea1")
   rangeArea1.innerHTML = e.target.value
 })
 //   Range 2
@@ -57,7 +60,6 @@ rangeInput2.addEventListener("input", (e) => {
     rangeInput2.value = rangeInput1.value
   }
 
-  const rangeArea2 = document.querySelector(".rangeArea2")
   rangeArea2.innerHTML = e.target.value
 })
 
@@ -90,6 +92,10 @@ resetKg.addEventListener("click", () => {
   })
   const foundedFavs = document.querySelector(".foundedFavs")
   foundedFavs.innerHTML = `${cards.length} pokes founded`
+  rangeInput1.value = 0
+  rangeInput2.value = 1500
+  rangeArea1.innerHTML = 0
+  rangeArea2.innerHTML = 1500
 })
 
 const searchInput = document.querySelector(".search");
@@ -201,7 +207,7 @@ row.addEventListener("click", (e) => {
       isExist ? "" : favPokes.push(Number(pokeId.slice(1)));
     }
     localStorage.setItem("favs", JSON.stringify(favPokes));
-    console.log(JSON.parse(localStorage.getItem("favs")));
+    // console.log(JSON.parse(localStorage.getItem("favs")));
 
     if (e.target.classList.contains("fa-regular")) {
       e.target.classList.replace("fa-regular", "fa-solid");
@@ -213,7 +219,11 @@ row.addEventListener("click", (e) => {
 });
 
 setTimeout(() => {
-  const pokeIds = document.querySelectorAll("#pokeIds");
+  
+  if(!localStorage.getItem("favs")){
+    // do nothing
+  }else{
+    const pokeIds = document.querySelectorAll("#pokeIds");
   // console.log(pokeIds)
 
   const favsArr = JSON.parse(localStorage.getItem("favs"));
@@ -229,13 +239,19 @@ setTimeout(() => {
       }
     }
   });
+  }
 
 }, 700);
 
-const showFavsButton = document.querySelector(".showFavs");
+const showFavsButton = document.querySelector(".showFavs")
+let favFlag = false
 
 showFavsButton.addEventListener("click", (e) => {
-  if(JSON.parse(localStorage.getItem("favs")).length == 0){
+
+  
+
+  if(JSON.parse(localStorage.getItem("favs")).length == 0 && e.target.innerText != "Show All"  ){
+    console.log(favFlag)
 
     alert("First choose a poke")
     
@@ -260,9 +276,7 @@ showFavsButton.addEventListener("click", (e) => {
   
       const foundedFavsDiv = document.querySelector(".foundedFavs")
       foundedFavsDiv.innerHTML = `${foundedFavsCounter} pokes founded`
-  
-    
-    
+      favFlag = true
     }else {
       showFavsButton.innerText = "Show Favourites";
       const cards = document.querySelectorAll(".card")
