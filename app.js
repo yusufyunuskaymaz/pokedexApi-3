@@ -132,7 +132,7 @@ const pokesNumbers = (pokeN) => {
 };
 
 const numbers = () => {
-  for (var i = 0; i <= 10; i++) {
+  for (var i = 0; i <= 150; i++) {
     fetchPokedex(i);
   }
   pokesNumbers(i);
