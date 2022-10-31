@@ -26,17 +26,16 @@ Build a Landing that is functionally similar to this: [Parallax Website](https:/
 
 ### At the end of the project, following topics are to be covered;
 
-- HTML 
+- Javascript 
 
-- List Properties
+- Fetching Data From an Api
 
-- Overflow Property-The float Property-Opacity / Transparency-Units in CSS
+- Using localstorage
 
-- CSS Setting height and width-CSS Outline-CSS Combinators
 
 
 ### At the end of the project, İ will be able to;
 
-- improve coding skills within HTML & CSS
+- improve coding skills within HTML & CSS & Javascript
 
 - use git commands (push, pull, commit, add etc.) and Github as Version Control System.
