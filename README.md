@@ -16,7 +16,7 @@ Project aims to create parallax website.
 |----solution
         |----index.html  
         |----style.css   
-        |----images
+        |----app.js
 ```
 
 
