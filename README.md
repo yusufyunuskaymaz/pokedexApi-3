@@ -1,7 +1,7 @@
 # pokedexApi-3
 Pokedex Api
 ![gif](ezgif.com-gif-maker.gif)
-[📍click here to see page](https://yaserdemet.github.io/parallax-website)
+[📍click here to see page](https://yusufyunuskaymaz.github.io/pokedexApi-3/)
 
 ## Description
 Project aims to create parallax website.
@@ -22,7 +22,7 @@ Project aims to create parallax website.
 
 ## Objective
 
-Build a Landing that is functionally similar to this: [Parallax Website](https://mark-mad.github.io/parallax-website/)
+Build a Landing that is functionally similar to this: [Pokedex Site](https://yusufyunuskaymaz.github.io/pokedexApi-3/)
 
 ### At the end of the project, following topics are to be covered;
 
